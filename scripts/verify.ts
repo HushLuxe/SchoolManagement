@@ -1,8 +1,8 @@
 import { run } from "hardhat";
 
 async function main(): Promise<void> {
-  // Use the deployed contract address
-  const contractAddress = "0xEb25C627B387f8f860B0622a0f2d2343f2a454C3";
+  // Use the deployed contract address (with access control)
+  const contractAddress = "0xdB43ef44E2Ad3B1f33F0573ADD326B86D6832e0B";
   
   console.log("Verifying contract on Etherscan...");
   console.log("Contract Address:", contractAddress);
