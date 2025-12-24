@@ -1,14 +1,9 @@
 import { run } from "hardhat";
 
 async function main(): Promise<void> {
-  const contractAddress = process.argv[2];
+  // Use the deployed contract address
+  const contractAddress = "0xEb25C627B387f8f860B0622a0f2d2343f2a454C3";
   
-  if (!contractAddress) {
-    console.error("❌ Please provide the contract address as an argument");
-    console.log("Usage: npx hardhat run scripts/verify.ts --network sepolia <CONTRACT_ADDRESS>");
-    process.exit(1);
-  }
-
   console.log("Verifying contract on Etherscan...");
   console.log("Contract Address:", contractAddress);
   console.log("==================================================");
