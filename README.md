@@ -1,4 +1,4 @@
-# School Management Smart Contract
+# School Management System
 
 A Solidity-based smart contract for managing student records on the Ethereum blockchain using Hardhat development environment.
 
