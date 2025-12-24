@@ -3,6 +3,18 @@ pragma solidity ^0.8.0;
 
 contract SchoolManagement {
     
+    address public owner;
+    
+    // Modifier to restrict access to owner only
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only owner can perform this action");
+        _;
+    }
+    
+    constructor() {
+        owner = msg.sender;
+    }
+    
     enum Status {
         ACTIVE,
         DEFERRED,
@@ -25,7 +37,7 @@ contract SchoolManagement {
     event StudentDeleted(uint indexed studentId);
     event StudentStatusChanged(uint indexed studentId, Status newStatus);
 
-    function registerStudent(string memory _name, uint _age) public {
+    function registerStudent(string memory _name, uint _age) public onlyOwner {
         require(bytes(_name).length > 0, "Name cannot be empty");
         require(_age > 0 && _age < 150, "Invalid age");
         
@@ -35,7 +47,7 @@ contract SchoolManagement {
         emit StudentRegistered(studentId, _name, _age, Status.ACTIVE);
     }
 
-    function updateStudent(uint _id, string memory _newName) public {
+    function updateStudent(uint _id, string memory _newName) public onlyOwner {
         require(bytes(_newName).length > 0, "Name cannot be empty");
         require(_id > 0 && _id <= studentId, "Invalid student ID");
         
@@ -50,7 +62,7 @@ contract SchoolManagement {
         revert("Student not found");
     }
 
-    function updateStudentStatus(uint _id, Status _newStatus) public {
+    function updateStudentStatus(uint _id, Status _newStatus) public onlyOwner {
         require(_id > 0 && _id <= studentId, "Invalid student ID");
         
         for (uint i = 0; i < students.length; i++) {
@@ -65,7 +77,7 @@ contract SchoolManagement {
     }
 
     // This function removes student from array completely
-    function deleteById(uint _id) public {
+    function deleteById(uint _id) public onlyOwner {
         require(_id > 0 && _id <= studentId, "Invalid student ID");
         
         for (uint i = 0; i < students.length; i++) {
